@@ -1,1 +1,44 @@
-<p>task-table works!</p>
+<div class="p-2 w-full">
+  <!-- **** Button Section **** -->
+  <div class="w-full flex items-center gap-3">
+    <!-- New Task  -->
+    <button class="flex justify-center items-center bg-blue-700 rounded-md gap-2" mat-button [matMenuTriggerFor]="menu">
+      <span class="py-1 px-2">New Task</span>
+      <!-- Divider -->
+      <span class="w-px h-8 bg-neutral-700"></span>
+      <!-- Icon -->
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Create new task</button>
+    </mat-menu>
+
+    <!-- **** Search Section **** -->
+     <div class="flex items-center pl-1 min-h-8">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="!text-neutral-400" fontSet="material-icons-outlined">search</mat-icon>
+      </div>
+
+      <!-- Input -->
+      <div class="input">
+        <input placeholder="Search" class="text-neutral-300 bg-transparent active:outline-none focus:outline-none max-w-16 pl-1" type="text">
+      </div>
+     </div>
+
+     <!-- **** Search Person Section **** -->
+     <div class="flex items-center pl-1 min-h-8">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="text-neutral-400" fontSet="material-icons-outlined">person</mat-icon>
+      </div>
+
+      <!-- Input Developer -->
+      <div class="input">
+      </div>
+     </div>
+
+  </div>
+
+  <!-- Table Section -->
+</div>

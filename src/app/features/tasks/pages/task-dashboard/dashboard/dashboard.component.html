@@ -1,1 +1,26 @@
-<app-task-kanban></app-task-kanban>
+<div class="min-h-screen h-full bg-[#151d2a]">
+  <mat-tab-group>
+    <!-- Tab 1 -->
+    <mat-tab> 
+      <ng-template mat-tab-label>
+        <mat-icon fontSet="material-icons-outlined" class="mr-1">home</mat-icon>
+        <span>Main Table</span>
+      </ng-template>
+
+      <div class="p-4 text-white">
+        <app-task-table></app-task-table>
+      </div>
+    </mat-tab>
+
+    <!-- Tab 2 -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span>Kanban</span>
+      </ng-template>
+
+      <div class="p-4 text-neutral-200">
+        Under Construction
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>

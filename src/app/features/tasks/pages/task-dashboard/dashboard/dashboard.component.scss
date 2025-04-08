@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined");
+
+:host::ng-deep.mat-mdc-tab-group.mat-mdc-tab-group-stretch-tabs>.mat-mdc-tab-header .mat-mdc-tab {
+  flex-grow: 0 !important;
+}
+
+:host::ng-deep .mat-mdc-tab-group, 
+:host::ng-deep .mat-mdc-tab-nav-bar {
+  z-index: 1000;
+  --mdc-tab-indicator-active-indicator-color: #1B56FD !important;
+  --mat-tab-header-active-label-text-color: #dddedf !important;
+  --mat-tab-header-active-ripple-color: #dddedf !important;
+  --mat-tab-header-active-focus-label-text-color: #dddedf !important;
+  --mat-tab-header-active-hover-label-text-color: #dddedf !important;
+  --mat-tab-header-active-focus-indicator-color: #1B56FD !important;
+  --mat-tab-header-active-hover-indicator-color: #1B56FD !important;
+
+  --mat-tab-header-inactive-label-text-color: #dddedf !important;
+  --mat-tab-header-inactive-ripple-color: #dddedf !important;
+  --mat-tab-header-inactive-focus-label-text-color: #dddedf !important;
+  --mat-tab-header-inactive-hover-label-text-color: #dddedf !important;
+
+  --mat-tab-header-disabled-ripple-color: #dddedf !important;
+  --mat-tab-header-pagination-icon-color: #dddedf !important;
+}
+
+:host::ng-deep.mat-mdc-focus-indicator {
+  top: 1px !important;
+}
+
+:host::ng-deep.mat-mdc-tab-labels {
+  border-bottom: 0.08rem solid #31363e;
+}
