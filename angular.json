@@ -65,10 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "talenta-test:build:production"
+              "buildTarget": "talenta-test:build:production"
             },
             "development": {
-              "browserTarget": "talenta-test:build:development"
+              "buildTarget": "talenta-test:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -76,7 +76,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "talenta-test:build"
+            "buildTarget": "talenta-test:build"
           }
         },
         "test": {
