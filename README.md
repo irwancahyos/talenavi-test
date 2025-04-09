@@ -1,6 +1,6 @@
 # TalentaTest
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.10.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
 
 ## Development server
 
@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+## Example Picture of Project
+<img width="1435" alt="image" src="https://github.com/user-attachments/assets/63374ff0-ce7a-4452-95ff-9eb93a4e7069" />
+
+<img width="790" alt="image" src="https://github.com/user-attachments/assets/e1d10a33-d8c6-432c-bf6f-3fd1f6476754" />
+
+<img width="542" alt="image" src="https://github.com/user-attachments/assets/cab24bb3-cd84-45d6-8884-0c3bf18904b4" />
+
+<img width="1409" alt="image" src="https://github.com/user-attachments/assets/245d675b-7825-46b3-8ce1-d0096273f507" />
+
+## Note
+- This project still not have pagination yet because i able use API in the 3 hourse before the deadline
+- Some of feature not able use yet
