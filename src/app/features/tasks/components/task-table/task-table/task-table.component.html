@@ -10,7 +10,7 @@
       <mat-icon>arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item>Create new task</button>
+      <button (click)="createNewTask()" mat-menu-item>Create new task</button>
     </mat-menu>
 
     <!-- **** Search Section **** -->
@@ -22,23 +22,233 @@
 
       <!-- Input -->
       <div class="input">
-        <input placeholder="Search" class="text-neutral-300 bg-transparent active:outline-none focus:outline-none max-w-16 pl-1" type="text">
+        <input placeholder="Search"
+          class="text-neutral-300 bg-transparent active:outline-none focus:outline-none max-w-16 pl-1" type="text"
+          [(ngModel)]="searchText" (ngModelChange)="applyFilter()">
       </div>
      </div>
 
      <!-- **** Search Person Section **** -->
-     <div class="flex items-center pl-1 min-h-8">
+     <div class="flex items-center pl-1 min-h-8 gap-1">
       <!-- Icon -->
       <div class="flex">
         <mat-icon class="text-neutral-400" fontSet="material-icons-outlined">person</mat-icon>
       </div>
 
       <!-- Input Developer -->
-      <div class="input">
+      <div class="input text-neutral-400">
+        <form class="example-form">
+          <input name="searchPerson" type="text" (input)="applyDeveloperFilter()" [(ngModel)]="searchPerson"
+            class="text-neutral-300 hover:cursor-pointer bg-transparent active:outline-none max-w-14 focus:outline-none"
+            placeholder="Person" matInput [matAutocomplete]="auto">
+          <mat-autocomplete [panelWidth]="'auto'" (optionSelected)="onDeveloperSelected($event)" #auto="matAutocomplete">
+            <!-- Option untuk tampilkan semua -->
+            <mat-option [value]="'All'">All</mat-option>
+            <mat-option *ngFor="let dev of uniqueDevelopers" [value]="dev">
+              {{ dev }}
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+      </div>
+     </div>
+
+     <!-- **** Sort Section **** -->
+     <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-pointer">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="text-neutral-400" fontSet="material-icons">unfold_more</mat-icon>
+      </div>
+
+      <!-- Sort -->
+      <div class="input text-neutral-400">
+        <span>Sort</span>
       </div>
      </div>
 
   </div>
 
-  <!-- Table Section -->
+  <!-- ***** Table Section ***** -->
+  <div class="table-container mt-4">
+    <!-- **** Filter Task Section **** -->
+    <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-pointer">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="rotate-90 text-purple-700">chevron_right</mat-icon>
+      </div>
+  
+      <!-- Sort -->
+      <div class="input text-purple-700">
+        <span>All Task</span>
+      </div>
+    </div>
+  
+    <!-- Table -->
+    <table [dataSource]="dataSource" mat-table class="mat-elevation-z8 w-full" matSort>
+    
+      <!-- Checkbox Column -->
+      <ng-container matColumnDef="select">
+        <th mat-header-cell *matHeaderCellDef>
+          <mat-checkbox class="mat-accent" (change)="toggleAllRows()" [checked]="isAllSelected()"
+            [indeterminate]="selection.hasValue() && !isAllSelected()" [aria-label]="checkboxLabel()">
+          </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-checkbox class="mat-accent" (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+            [checked]="selection.isSelected(row)" [aria-label]="checkboxLabel(row)">
+          </mat-checkbox>
+        </td>
+      </ng-container>
+    
+      <!-- Task Column -->
+      <ng-container matColumnDef="task">
+        <th mat-header-cell *matHeaderCellDef> Task </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showTask">
+            <input [(ngModel)]="element.task" class="bg-transparent max-w-50 border-b border-white outline-none" />
+          </ng-container>
+          <ng-template #showTask>{{ element.task }}</ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Developer Column -->
+      <ng-container matColumnDef="developers">
+        <th mat-header-cell *matHeaderCellDef> Developers </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showDevelopers">
+            <input [(ngModel)]="element.developersString"
+                   class="bg-transparent border-b border-white outline-none max-w-[115px]"
+                   placeholder="Comma separated" />
+          </ng-container>
+          <ng-template #showDevelopers>
+            {{ element.developers.join(', ') }}
+          </ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Status Column -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td [attr.class]="getStatusClass(element.status)" mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showStatus">
+            <mat-select panelWidth="'auto'" class="!text-[#e5e5e5]" [(ngModel)]="element.status">
+              <mat-option *ngFor="let s of statuses" [value]="s">{{ s }}</mat-option>
+            </mat-select>
+          </ng-container>
+          <ng-template #showStatus>{{ element.status }}</ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Priority Column -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef> Priority </th>
+        <td [attr.class]="getPriorityClass(element.priority)" mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showPriority">
+            <mat-select panelWidth="'auto'" class="!text-[#e5e5e5]" [(ngModel)]="element.priority">
+              <mat-option *ngFor="let p of priorities" [value]="p">{{ p }}</mat-option>
+            </mat-select>
+          </ng-container>
+          <ng-template #showPriority>{{ element.priority }}</ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td [attr.class]="getTypeClass(element.type)" mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showType">
+            <mat-select panelWidth="'auto'" class="!text-[#e5e5e5]" [(ngModel)]="element.type">
+              <mat-option *ngFor="let t of types" [value]="t">{{ t }}</mat-option>
+            </mat-select>
+          </ng-container>
+          <ng-template #showType>{{ element.type }}</ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Date Column -->
+      <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Date </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i; else showDate">
+            <div class="relative">
+              <input class="invisible max-w-24" matInput [matDatepicker]="picker" [(ngModel)]="element.date" (dateChange)="onDateChange($event.value, i)" />
+              <span class="absolute top-0 left-0">{{ element.date | date: 'dd/MM/yy' }}</span>
+              <mat-datepicker-toggle class="absolute -right-5 -top-3" matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </ng-container>
+        
+          <ng-template #showDate>
+            {{ element.date | date: 'dd/MM/yy' }}
+          </ng-template>
+        </td>
+      </ng-container>
+  
+      <!-- Estimated SP -->
+      <ng-container matColumnDef="estimatedSP">
+        <th mat-header-cell *matHeaderCellDef> Est. SP </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.estimatedSP }}
+        </td>
+      </ng-container>
+  
+      <!-- Actual SP -->
+      <ng-container matColumnDef="actualSP">
+        <th mat-header-cell *matHeaderCellDef> Actual SP </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.actualSP }}
+        </td>
+      </ng-container>
+
+      <!-- Action -->
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container>
+            <button class="hover:opacity-50" mat-button color="primary" (click)="saveRow(i)">
+              <mat-icon>check</mat-icon>
+            </button>
+            <ng-container *ngIf="editRowIndex === i && !element.isNew">
+              <button class="hover:opacity-50" mat-button color="warn" (click)="cancelEdit()">
+                <mat-icon>cancel</mat-icon>
+              </button>
+            </ng-container>
+            <button [disabled]="editRowIndex !== null && editRowIndex !== i" class="hover:opacity-50" mat-button color="warn" (click)="deleteRow(i)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </ng-container>
+        </td>
+      </ng-container>
+  
+      <!-- Actions -->
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; let i = index; columns: displayedColumns;" (dblclick)="startEdit(i)"></tr>
+
+    </table>
+
+    <!-- Indikator -->
+    <div class="flex justify-end">
+      <div class="h-9 w-[61.650%] flex custom-table">
+        <div class="footer-table w-[21%] flex first p-2">
+          <div *ngFor="let item of getStatusDistribution()" class="h-[100%]" [ngClass]="item.class" [style.width.%]="item.percentage">
+          </div>
+        </div>
+        <div class="footer-table w-[10.900%] flex p-2 second">
+          <div *ngFor="let item of getPriorityDistribution()" class="h-[100%]" [ngClass]="item.class" [style.width.%]="item.percentage"></div>
+        </div>
+        <div class="footer-table w-[20.300%] flex p-2 three">
+          <div *ngFor="let item of getTypeDistribution()" class="h-[100%]" [ngClass]="item.class" [style.width.%]="item.percentage"></div>
+        </div>
+        <div class="footer-table w-[12.770%] four"></div>
+        <div class="footer-table w-[10.800%] flex justify-center items-center five">
+          {{ getTotalEstimatedSP() }}
+        </div>
+        <div class="footer-table w-[12.999%] flex justify-center items-center six">
+          {{ getTotalActualSP() }}
+        </div>
+        <div class="footer-table flex-1 seven"></div>
+      </div>
+    </div>
+    <mat-datepicker #picker></mat-datepicker>
+  </div>
+
 </div>

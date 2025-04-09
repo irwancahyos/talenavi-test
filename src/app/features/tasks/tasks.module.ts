@@ -8,6 +8,14 @@ import { DashboardComponent } from './pages/task-dashboard/dashboard/dashboard.c
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import {MatSelectModule} from '@angular/material/select';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTableModule} from '@angular/material/table';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -21,7 +29,15 @@ import {MatMenuModule} from '@angular/material/menu';
     TasksRoutingModule,
     MatTabsModule,
     MatIconModule,
-    MatMenuModule
+    MatMenuModule,
+    NgSelectModule,
+    FormsModule,
+    MatSelectModule,
+    MatAutocompleteModule,
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   exports: [
     DashboardComponent
