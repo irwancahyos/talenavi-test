@@ -1,0 +1,128 @@
+<div class="p-2 w-full">
+  <!-- **** Button Section **** -->
+  <div class="button-section w-full flex items-center gap-3">
+    <!-- New Task  -->
+    <button class="flex justify-center items-center bg-blue-700 rounded-md gap-2" mat-button [matMenuTriggerFor]="menu">
+      <span class="py-1 px-2">New Task</span>
+      <!-- Divider -->
+      <span class="w-px h-8 bg-neutral-700"></span>
+      <!-- Icon -->
+      <mat-icon>arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="openNewTask()" mat-menu-item>Create new task</button>
+    </mat-menu>
+
+    <!-- **** Search Section **** -->
+     <div class="flex items-center pl-1 min-h-8">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="!text-neutral-400" fontSet="material-icons-outlined">search</mat-icon>
+      </div>
+
+      <!-- Input -->
+      <div class="input">
+        <input placeholder="Search"
+          class="text-neutral-300 bg-transparent active:outline-none focus:outline-none max-w-16 pl-1" type="text"
+          [(ngModel)]="searchText" (ngModelChange)="applyFilter()">
+      </div>
+     </div>
+
+     <!-- **** Search Person Section **** -->
+     <div class="flex items-center pl-1 min-h-8 gap-1">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="text-neutral-400" fontSet="material-icons-outlined">person</mat-icon>
+      </div>
+
+      <!-- Input Developer -->
+      <div class="input text-neutral-400">
+        <form class="example-form">
+          <input name="searchPerson" type="text" (input)="applyDeveloperFilter()" [(ngModel)]="searchPerson"
+            class="text-neutral-300 hover:cursor-pointer bg-transparent active:outline-none max-w-14 focus:outline-none"
+            placeholder="Person" matInput [matAutocomplete]="auto">
+          <mat-autocomplete [panelWidth]="'auto'" (optionSelected)="onDeveloperSelected($event)" #auto="matAutocomplete">
+            <!-- Option untuk tampilkan semua -->
+            <mat-option [value]="'All'">All</mat-option>
+            <mat-option *ngFor="let dev of uniqueDevelopers" [value]="dev">
+              {{ dev }}
+            </mat-option>
+          </mat-autocomplete>
+        </form>
+      </div>
+     </div>
+
+     <!-- **** Sort Section **** -->
+     <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-not-allowed opacity-40">
+      <!-- Icon -->
+      <div class="flex">
+        <mat-icon class="text-neutral-400" fontSet="material-icons">unfold_more</mat-icon>
+      </div>
+
+      <!-- Sort -->
+      <div class="input text-neutral-400">
+        <span>Sort</span>
+      </div>
+     </div>
+
+  </div>
+
+  <!-- Start for kanban -->
+  <div #scrollZone cdkDropListGroup class="scroll-container w-full pt-8 flex gap-4">
+
+    <!-- Card Start -->
+     <div *ngFor="let taskByStatus of mappedTaskByStatus; let i = index" [class]="`kanban-card cursor-pointer overflow-hidden bg-[#262d387a] min-w-[20vw] h-[73vh] rounded-md`">
+      <div (mousedown)="startDrag($event)" (mousemove)="onDrag($event)" (mouseup)="endDrag()"
+      (mouseleave)="endDrag()" [ngClass]="`${['bg-[#c09d33]','bg-[#5e78a6]','bg-[#688d58]','bg-[#61b13c]','bg-[#e06666]','bg-[#8e7cc3]'][i]} w-full flex justify-center items-center text-neutral-300 rounded-t-md h-10`"> 
+        <!-- Header Title -->
+        <h3>{{headerTaskStatus[i]}}</h3>
+      </div>
+  
+      <!-- Child card container --> 
+      <div cdkDropList (cdkDropListDropped)="dragCard($event, i)" [cdkDropListData]="taskByStatus" class="w-full min-h-full scroll-container h-52 overflow-y-auto gap-4">
+  
+        <div *ngFor="let task of taskByStatus" cdkDrag [cdkDragData]="task" [class]="`child-card w-[90%] text-neutral-400 m-auto mt-4 cursor-move p-3 bg-[#151d2a] rounded-md`">
+          <div class="h-full w-full flex flex-col justify-between">
+            <div>
+              <div class="mb-2">
+                <p>{{task?.task}}</p>
+              </div>
+              <div class="mb-2">
+                <div [class]="`w-fit bg-[#56575a9e] py-[0.01rem] pr-[0.2rem] rounded-sm border-l-4 pl-2 ${task.priority === 'Critical' ? 'border-l-[#dc2626]' : task.priority === 'Best Effort' ? 'border-l-[#3b82f6]' : task.priority === 'High' ? 'border-l-[#f97316]' : task.priority === 'Medium' ? 'border-l-[#eab308]' : task.priority === 'Low' ? 'border-l-[#10b981]' : ''}`">
+                  <p>{{task?.priority}}</p>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div [class]="`w-fit bg-[#56575a9e] py-[0.01rem] pr-[0.2rem] rounded-sm border-l-4 pl-2 ${task.type === 'Bug' ? 'border-l-[#ef4444]' : task.type === 'Other' ? 'border-l-[#6b7280]' : task.type === 'Feature Enhancements' ? 'border-l-[#3b82f6]' : ''}`">
+                  <p>{{task?.type}}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card button and developer -->
+            <div class="h-8 w-full flex justify-between">
+              <div class="developer h-full relative">
+                <div *ngFor="let dev of task.developers; let i = index" [class]="`${i !== 0 ? `translate-x-${i}`: ''} min-h-6 top-0 absolute min-w-6 border border-slate-700 rounded-full bg-gray-500`"></div>
+              </div>
+              <div class="button flex items-center h-full">
+                <button (click)="editTask(task)">
+                  <mat-icon class="small-icon">edit</mat-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+     </div>
+  
+  </div>
+</div>
+
+
+
+
+
+
+
+

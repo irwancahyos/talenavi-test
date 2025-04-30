@@ -53,7 +53,7 @@
      </div>
 
      <!-- **** Sort Section **** -->
-     <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-pointer">
+     <div class="flex items-center opacity-40 pl-1 min-h-8 gap-1 hover:cursor-not-allowed">
       <!-- Icon -->
       <div class="flex">
         <mat-icon class="text-neutral-400" fontSet="material-icons">unfold_more</mat-icon>
@@ -70,7 +70,7 @@
   <!-- ***** Table Section ***** -->
   <div class="table-container mt-4">
     <!-- **** Filter Task Section **** -->
-    <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-pointer">
+    <div class="flex items-center pl-1 min-h-8 gap-1 hover:cursor-pointer pb-2">
       <!-- Icon -->
       <div class="flex">
         <mat-icon class="rotate-90 text-purple-700">chevron_right</mat-icon>
@@ -78,7 +78,17 @@
   
       <!-- Sort -->
       <div class="input text-purple-700">
-        <span>All Task</span>
+        <button mat-button [matMenuTriggerFor]="allTask">
+          <span>{{taskChoice}}</span>
+          <!-- Divider -->
+          <span class="w-px h-8 bg-neutral-700"></span>
+        </button>
+        <mat-menu #allTask="matMenu" class="px-1">
+          <button *ngIf="taskChoice !== 'All Task'" (click)="mappedTaskBaseOnTaskType('All Task')" class="p-1 w-full text-left text-neutral-600 hover:text-neutral-200">All Task</button>
+          <div *ngFor="let type of taskType">
+            <button *ngIf="taskChoice !== type" (click)="mappedTaskBaseOnTaskType(type)" class="p-1 w-full text-left text-neutral-600 hover:text-neutral-200">{{type}}</button>
+          </div>
+        </mat-menu>
       </div>
     </div>
   
@@ -115,7 +125,7 @@
         <th mat-header-cell *matHeaderCellDef> Developers </th>
         <td mat-cell *matCellDef="let element; let i = index">
           <ng-container *ngIf="editRowIndex === i; else showDevelopers">
-            <input [(ngModel)]="element.developersString"
+            <input [formControl]="developerControls"
                    class="bg-transparent border-b border-white outline-none max-w-[115px]"
                    placeholder="Comma separated" />
           </ng-container>
@@ -186,16 +196,26 @@
       <!-- Estimated SP -->
       <ng-container matColumnDef="estimatedSP">
         <th mat-header-cell *matHeaderCellDef> Est. SP </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.estimatedSP }}
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i else showEstimatedSp">
+            <input [(ngModel)]="element.estimatedSP" class="bg-transparent border-b max-w-9 border-white outline-none" />
+          </ng-container>
+          <ng-template #showEstimatedSp>
+            {{ element.estimatedSP }}
+          </ng-template>
         </td>
       </ng-container>
   
       <!-- Actual SP -->
       <ng-container matColumnDef="actualSP">
         <th mat-header-cell *matHeaderCellDef> Actual SP </th>
-        <td mat-cell *matCellDef="let element">
-          {{ element.actualSP }}
+        <td mat-cell *matCellDef="let element; let i = index">
+          <ng-container *ngIf="editRowIndex === i else showActualSp">
+            <input [(ngModel)]="element.actualSP" class="bg-transparent border-b max-w-9 border-white outline-none" />
+          </ng-container>
+          <ng-template #showActualSp>
+            {{ element.actualSP }}
+          </ng-template>
         </td>
       </ng-container>
 
@@ -204,7 +224,7 @@
         <th mat-header-cell *matHeaderCellDef> Action </th>
         <td mat-cell *matCellDef="let element; let i = index">
           <ng-container>
-            <button class="hover:opacity-50" mat-button color="primary" (click)="saveRow(i)">
+            <button [disabled]="editRowIndex !== null && editRowIndex !== i" *ngIf="editRowIndex !== null" [class]="`hover:opacity-50 ${editRowIndex !== null && editRowIndex !== i ? 'opacity-50' : ''}`" mat-button color="primary" (click)="saveRow(element.task)">
               <mat-icon>check</mat-icon>
             </button>
             <ng-container *ngIf="editRowIndex === i && !element.isNew">
@@ -212,7 +232,7 @@
                 <mat-icon>cancel</mat-icon>
               </button>
             </ng-container>
-            <button [disabled]="editRowIndex !== null && editRowIndex !== i" class="hover:opacity-50" mat-button color="warn" (click)="deleteRow(i)">
+            <button [disabled]="editRowIndex !== null && editRowIndex !== i" [class]="`hover:opacity-50 ${editRowIndex !== null && editRowIndex !== i ? 'opacity-50' : ''}`" mat-button color="warn" (click)="deleteRow(element.task)">
               <mat-icon>delete</mat-icon>
             </button>
           </ng-container>
@@ -240,15 +260,19 @@
         </div>
         <div class="footer-table w-[12.770%] four"></div>
         <div class="footer-table w-[10.800%] flex justify-center items-center five">
-          {{ getTotalEstimatedSP() }}
+          {{ totalEstimatedSP }}
         </div>
         <div class="footer-table w-[12.999%] flex justify-center items-center six">
-          {{ getTotalActualSP() }}
+          {{ totalActualSP }}
         </div>
         <div class="footer-table flex-1 seven"></div>
       </div>
     </div>
     <mat-datepicker #picker></mat-datepicker>
+    
+    <!-- **** Paginator **** -->
+    <mat-paginator class="paginator-container !text-neutral-400" [length]="totalItems" [pageSize]="pageSize" (page)="onPageChange($event)">
+    </mat-paginator>
   </div>
 
 </div>

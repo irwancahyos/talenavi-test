@@ -1,4 +1,6 @@
+// ********** Imports **********
 import { Component, OnInit } from '@angular/core';
+import { TaskData } from '../../../components/task-table/task-table/task-table.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,14 +9,28 @@ import { Component, OnInit } from '@angular/core';
   standalone: false,
 })
 export class DashboardComponent implements OnInit {
+  // Variable Declaration
+  allTask: TaskData[] = [];
 
-  constructor(
-  ) {}
+  // ********** Constructor Lifecycle **********
+  constructor() {}
 
-  ngOnInit(): void {
-    this.getAllTodoList();
+  // ********** OnInit Lifecycle **********
+  ngOnInit(): void {}
+
+  /**
+   * Function to handle changging task from child
+   */
+  handleAllTask(data: TaskData[]) {
+    // re-assign latest data in the allTask
+    this.allTask = [...data];
   }
 
-  getAllTodoList() {
+  /**
+   * Function to handle changging task from child
+   */
+  handleAllTaskFromKanban(data: TaskData[]) {
+    // re-assign latest data in the allTask
+    this.allTask = [...data];
   }
 }

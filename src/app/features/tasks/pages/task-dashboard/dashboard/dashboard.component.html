@@ -1,6 +1,6 @@
 <div class="min-h-screen bg-[#151d2a]">
   <mat-tab-group>
-    <!-- Tab 1 -->
+    <!-- ********** Tab 1 ********** -->
     <mat-tab> 
       <ng-template mat-tab-label>
         <mat-icon fontSet="material-icons-outlined" class="mr-1">home</mat-icon>
@@ -8,18 +8,20 @@
       </ng-template>
 
       <div class="p-4 text-white">
-        <app-task-table></app-task-table>
+        <!-- ********** call task table component ********** -->
+        <app-task-table [allTaskFromParent]="allTask" (allTaskToParent)="handleAllTask($event)"></app-task-table>
       </div>
     </mat-tab>
 
-    <!-- Tab 2 -->
+    <!-- ********** Tab 2 ********** -->
     <mat-tab>
       <ng-template mat-tab-label>
         <span>Kanban</span>
       </ng-template>
 
       <div class="p-4 text-neutral-200">
-        Under Construction
+        <!-- ********** call task kanban component ********** -->
+        <app-task-kanban (allTaskToParent)="handleAllTaskFromKanban($event)" [allTaskFromParent]="allTask"></app-task-kanban>
       </div>
     </mat-tab>
   </mat-tab-group>

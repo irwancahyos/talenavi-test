@@ -1,0 +1,182 @@
+[
+  {
+      "title": "Implement user authentication",
+      "developer": "Alice, Bob",
+      "priority": "Critical",
+      "status": "In Progress",
+      "type": "Feature Enhancements",
+      "Estimated SP": 5,
+      "Actual SP": 4
+  },
+  {
+      "title": "Fix login page bug",
+      "developer": "Bob",
+      "priority": "High",
+      "status": "Ready to start",
+      "type": "Bug",
+      "Estimated SP": 3,
+      "Actual SP": 3
+  },
+  {
+      "title": "Refactor dashboard layout",
+      "developer": "Charlie",
+      "priority": "Medium",
+      "status": "Waiting for review",
+      "type": "Feature Enhancements",
+      "Estimated SP": 4,
+      "Actual SP": 5
+  },
+  {
+      "title": "Update API documentation",
+      "developer": "Alice",
+      "priority": "Low",
+      "status": "Done",
+      "type": "Other",
+      "Estimated SP": 2,
+      "Actual SP": 2
+  },
+  {
+      "title": "Optimize database queries",
+      "developer": "Bob, Charlie",
+      "priority": "Critical",
+      "status": "Stuck",
+      "type": "Bug",
+      "Estimated SP": 6,
+      "Actual SP": 7
+  },
+  {
+      "title": "Add unit tests for payment module",
+      "developer": "Charlie",
+      "priority": "High",
+      "status": "Pending Deploy",
+      "type": "Other",
+      "Estimated SP": 4,
+      "Actual SP": 4
+  },
+  {
+      "title": "Develop admin analytics dashboard",
+      "developer": "Alice",
+      "priority": "Medium",
+      "status": "Ready to start",
+      "type": "Feature Enhancements",
+      "Estimated SP": 7,
+      "Actual SP": 0
+  },
+  {
+      "title": "Investigate memory leak",
+      "developer": "Bob",
+      "priority": "Critical",
+      "status": "Waiting for review",
+      "type": "Bug",
+      "Estimated SP": 8,
+      "Actual SP": 6
+  },
+  {
+      "title": "Research new caching strategy",
+      "developer": "Charlie",
+      "priority": "Best Effort",
+      "status": "In Progress",
+      "type": "Other",
+      "Estimated SP": 2,
+      "Actual SP": 2
+  },
+  {
+      "title": "Integrate third-party payment gateway",
+      "developer": "Alice, Bob",
+      "priority": "High",
+      "status": "Pending Deploy",
+      "type": "Feature Enhancements",
+      "Estimated SP": 6,
+      "Actual SP": 6
+  },
+  {
+      "title": "Improve error logging",
+      "developer": "Bob",
+      "priority": "Low",
+      "status": "Done",
+      "type": "Other",
+      "Estimated SP": 3,
+      "Actual SP": 2
+  },
+  {
+      "title": "Fix CSS issues on mobile",
+      "developer": "Charlie",
+      "priority": "Medium",
+      "status": "Stuck",
+      "type": "Bug",
+      "Estimated SP": 3,
+      "Actual SP": 0
+  },
+  {
+      "title": "Create deployment scripts",
+      "developer": "Alice",
+      "priority": "High",
+      "status": "In Progress",
+      "type": "Other",
+      "Estimated SP": 4,
+      "Actual SP": 4
+  },
+  {
+      "title": "Migrate database to new server",
+      "developer": "Bob, Charlie",
+      "priority": "Critical",
+      "status": "Ready to start",
+      "type": "Feature Enhancements",
+      "Estimated SP": 7,
+      "Actual SP": 0
+  },
+  {
+      "title": "Conduct API load testing",
+      "developer": "Charlie",
+      "priority": "High",
+      "status": "Waiting for review",
+      "type": "Other",
+      "Estimated SP": 5,
+      "Actual SP": 5
+  },
+  {
+      "title": "Implement two-factor authentication",
+      "developer": "Alice, Bob",
+      "priority": "Critical",
+      "status": "In Progress",
+      "type": "Feature Enhancements",
+      "Estimated SP": 8,
+      "Actual SP": 7
+  },
+  {
+      "title": "Fix pagination issue on user table",
+      "developer": "Bob",
+      "priority": "Medium",
+      "status": "Ready to start",
+      "type": "Bug",
+      "Estimated SP": 4,
+      "Actual SP": 0
+  },
+  {
+      "title": "Upgrade project dependencies",
+      "developer": "Charlie, Alice",
+      "priority": "High",
+      "status": "Pending Deploy",
+      "type": "Other",
+      "Estimated SP": 6,
+      "Actual SP": 5
+  },
+  {
+      "title": "Add localization support",
+      "developer": "Alice",
+      "priority": "Medium",
+      "status": "Done",
+      "type": "Feature Enhancements",
+      "Estimated SP": 4,
+      "Actual SP": 3
+  },
+  {
+      "title": "Fix 404 error on settings page",
+      "developer": "Bob",
+      "priority": "Critical",
+      "status": "In Progress",
+      "type": "Bug",
+      "Estimated SP": 3,
+      "Actual SP": 3
+  }
+]

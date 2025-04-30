@@ -1,0 +1,31 @@
+.button-section {
+  border-bottom: 0.08rem solid #31363e !important;
+  padding-bottom: 20px;
+}
+
+// Border within card, each card within card
+.child-card {
+  border: 0.08rem solid #31363e !important;
+}
+
+// Style to hidden the scrollbar in the card kanban
+:host::ng-deep.scroll-container {
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.small-icon {
+  font-size: 22px; /* Atur sesuai kebutuhan */
+  height: 22px;
+  width: 22px;
+}
+
+
+
+

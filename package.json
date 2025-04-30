@@ -23,6 +23,7 @@
     "@ng-select/ng-select": "^14.2.6",
     "axios": "^1.8.4",
     "rxjs": "~7.8.0",
+    "subsink": "^1.0.2",
     "talenta-test": "file:",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"

@@ -1,0 +1,144 @@
+
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" cdkDragHandle class="dialog-container w-full h-full">
+  <!-- ******** Dialog Headers ******** -->
+  <div>
+    <h1 mat-dialog-title>
+      <span class="font-semibold text-neutral-700">{{ dataEdit ? 'Edit Task' : 'Create Task'}}</span>
+    </h1>
+  </div>
+  <div>
+    <form [formGroup]="taskForm" [autofocus]="false" mat-dialog-content>
+      <!-- ******** Task and date ******** -->
+      <div class="flex justify-between w-full">
+        <!-- ******** Task Name ******** -->
+        <div class="w-[47%]">
+          <div class="relative">
+            <input [class]="`h-7 border w-full ${taskForm.get('task').errors && taskForm.get('task').touched ? 'border-red-600' : 'border-gray-300'} rounded-lg focus:outline-none pl-2 font-thin`" placeholder="Task Name"
+              formControlName="task">
+              <mat-error class="absolute top-7 font-thin text-xs text-red-600 left-1" *ngIf="taskForm.get('task').errors && taskForm.get('task').touched">This field is required</mat-error>
+          </div>
+        </div>
+        <!-- ******** Task Date ******** -->
+        <div class="w-[47%]">
+          <div>
+            <div class="relative">
+              <input readonly="true" matInput class="border h-7 w-full border-gray-300 rounded-lg focus:outline-none pl-2 font-thin"
+                placeholder="Date" formControlName="date" [matDatepicker]="picker" (dateChange)="onDateChange($event?.value)">
+              <mat-datepicker-toggle class="absolute right-0 -top-[0.6rem]" matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******** Status Type and Priority ******** -->
+      <div class="flex justify-between w-full mt-7">
+        <!-- ******** Task Status ******** -->
+        <div class="w-[32%]">
+            <input
+              matInput
+              formControlName="status"
+              placeholder="Status"
+              [matAutocomplete]="autoCompleteStatus"
+              (click)="statusInput.openPanel()"
+              #statusInput="matAutocompleteTrigger"
+              readonly
+              class="hover:cursor-pointer active:outline-none w-full focus:outline-none h-7 border-gray-300 border font-thin pl-2 rounded-lg"
+            />
+            <mat-autocomplete
+              #autoCompleteStatus="matAutocomplete"
+              [panelWidth]="'auto'"
+            >
+              <mat-option *ngFor="let status of statusOptions" [value]="status?.value">
+                {{ status?.value }}
+              </mat-option>
+            </mat-autocomplete>
+        </div>
+        <!-- ******** Task Priority ******** -->
+        <div class="w-[32%]">
+          <div>
+            <input #priorityInput="matAutocompleteTrigger" (click)="priorityInput.openPanel()" readonly="true" formControlName="priority" type="text"
+            class="h-7 border-gray-300 border font-thin rounded-lg pl-2 hover:cursor-pointer bg-transparent active:outline-none w-full focus:outline-none"
+            placeholder="Task Priority" matInput [matAutocomplete]="autoCompletePriority">
+          <mat-autocomplete [panelWidth]="'auto'" #autoCompletePriority="matAutocomplete">
+            <mat-option *ngFor="let priority of priorityOptions" [value]="priority?.value">{{priority?.value}}</mat-option>
+          </mat-autocomplete>
+          </div>
+        </div>
+        <!-- ******** Task Type ******** -->
+        <div class="w-[32%]">
+          <div>
+            <input #typeInput="matAutocompleteTrigger" (click)="typeInput.openPanel()" readonly="true" formControlName="type" type="text"
+            class="h-7 border-gray-300 border font-thin rounded-lg pl-2 hover:cursor-pointer bg-transparent active:outline-none w-full focus:outline-none"
+            placeholder="Task Type" matInput [matAutocomplete]="autoCompleteType">
+          <mat-autocomplete [panelWidth]="'auto'" #autoCompleteType="matAutocomplete">
+            <mat-option *ngFor="let type of typeOptions" [value]="type?.value">{{type?.value}}</mat-option>
+          </mat-autocomplete>
+          </div>
+        </div>
+      </div>
+
+       <!-- ******** Developers ******** -->
+      <div class="flex justify-between w-full mt-7">
+        <!-- ******** Task Developers ******** -->
+        <div class="w-full">
+          <div class="relative">
+
+            <mat-chip-grid [class]="`border ${taskForm.get('developers').errors && taskForm.get('developers').touched ? 'border-red-600' : 'border-gray-300'} rounded-lg pl-2`" #chipGrid>
+              @for (developer of developers(); track developer) {
+              <mat-chip-row (removed)="remove(developer)" [editable]="true" (edited)="edit(developer, $event)"
+                [aria-description]="'press enter to edit ' + developer">
+                {{developer}}
+                <button matChipRemove [attr.aria-label]="'remove ' + developer">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              }
+        
+              <input placeholder="Add developers..." [matChipInputFor]="chipGrid"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                (matChipInputTokenEnd)="add($event)"
+                [class]="`h-7 focus:outline-none pl-2 font-thin`"
+                formControlName="developers">
+            </mat-chip-grid>
+
+            <mat-error class="absolute top-7 font-thin text-xs text-red-600 left-1"
+              *ngIf="taskForm.get('developers').errors && taskForm.get('developers').touched">This field is required</mat-error>
+          </div>
+        </div>
+      </div>
+
+      <!-- ******** Estimated SP and Actual SP ******** -->
+      <div class="flex justify-between w-full mt-7">
+         <!-- ******** Task Estimated SP ******** -->
+        <div class="w-[47%]">
+          <div class="relative">
+            <input type="number" [class]="`h-7 border w-full ${taskForm.get('estimatedSP').errors && taskForm.get('estimatedSP').touched ? 'border-red-600' : 'border-gray-300'} rounded-lg focus:outline-none pl-2 font-thin`" placeholder="Estimated SP"
+              formControlName="estimatedSP">
+              <mat-error class="absolute top-7 font-thin text-xs text-red-600 left-1" *ngIf="taskForm.get('estimatedSP').errors && taskForm.get('estimatedSP').touched">This field is required</mat-error>
+          </div>
+        </div>
+        <!-- ******** Task Actual SP ******** -->
+        <div class="w-[47%]">
+          <div class="relative">
+            <input type="number" [class]="`h-7 border w-full ${taskForm.get('actualSP').errors && taskForm.get('actualSP').touched ? 'border-red-600' : 'border-gray-300'} rounded-lg focus:outline-none pl-2 font-thin`" placeholder="Actual SP"
+              formControlName="actualSP">
+              <mat-error class="absolute top-7 font-thin text-xs text-red-600 left-1" *ngIf="taskForm.get('actualSP').errors && taskForm.get('actualSP').touched">This field is required</mat-error>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </div>
+
+  <!-- ******** Button Section ******** -->
+  <div class="w-full flex gap-4 justify-end px-7 mt-2 mb-7">
+    <div>
+      <button [disabled]="!taskForm.valid" (click)="submitTask()" [class]="`${!taskForm.valid ? 'bg-neutral-300 text-neutral-500 opacity-55' : 'text-neutral-50 bg-green-500 hover:opacity-75'} px-4 py-1  rounded-md shadow-sm shadow-[#4e4c4c]`">Submit</button>
+    </div>
+    <div>
+      <button (click)="cancelButton()" class="px-4 py-1 text-neutral-50 bg-red-500 hover:opacity-75 rounded-md shadow-sm shadow-[#4e4c4c]">Cancel</button>
+    </div>
+  </div>
+</div>
+

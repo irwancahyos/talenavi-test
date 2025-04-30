@@ -1,0 +1,248 @@
+[
+  {
+      "task": "Implement user authentication",
+      "developers": [
+          "Alice",
+          " Bob"
+      ],
+      "status": "In Progress",
+      "priority": "Critical",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 5,
+      "actualSP": 4
+  },
+  {
+      "task": "Fix login page bug",
+      "developers": [
+          "Bob"
+      ],
+      "status": "Ready to start",
+      "priority": "High",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 3,
+      "actualSP": 3
+  },
+  {
+      "task": "Refactor dashboard layout",
+      "developers": [
+          "Charlie"
+      ],
+      "status": "Waiting for review",
+      "priority": "Medium",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 4,
+      "actualSP": 5
+  },
+  {
+      "task": "Update API documentation",
+      "developers": [
+          "Alice"
+      ],
+      "status": "Done",
+      "priority": "Low",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 2,
+      "actualSP": 2
+  },
+  {
+      "task": "Optimize database queries",
+      "developers": [
+          "Bob",
+          " Charlie"
+      ],
+      "status": "Stuck",
+      "priority": "Critical",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 6,
+      "actualSP": 7
+  },
+  {
+      "task": "Add unit tests for payment module",
+      "developers": [
+          "Charlie"
+      ],
+      "status": "Pending Deploy",
+      "priority": "High",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 4,
+      "actualSP": 4
+  },
+  {
+      "task": "Develop admin analytics dashboard",
+      "developers": [
+          "Alice"
+      ],
+      "status": "Ready to start",
+      "priority": "Medium",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 7,
+      "actualSP": 0
+  },
+  {
+      "task": "Investigate memory leak",
+      "developers": [
+          "Bob"
+      ],
+      "status": "Waiting for review",
+      "priority": "Critical",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 8,
+      "actualSP": 6
+  },
+  {
+      "task": "Research new caching strategy",
+      "developers": [
+          "Charlie"
+      ],
+      "status": "In Progress",
+      "priority": "Best Effort",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 2,
+      "actualSP": 2
+  },
+  {
+      "task": "Integrate third-party payment gateway",
+      "developers": [
+          "Alice",
+          " Bob"
+      ],
+      "status": "Pending Deploy",
+      "priority": "High",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 6,
+      "actualSP": 6
+  },
+  {
+      "task": "Improve error logging",
+      "developers": [
+          "Bob"
+      ],
+      "status": "Done",
+      "priority": "Low",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 3,
+      "actualSP": 2
+  },
+  {
+      "task": "Fix CSS issues on mobile",
+      "developers": [
+          "Charlie"
+      ],
+      "status": "Stuck",
+      "priority": "Medium",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 3,
+      "actualSP": 0
+  },
+  {
+      "task": "Create deployment scripts",
+      "developers": [
+          "Alice"
+      ],
+      "status": "In Progress",
+      "priority": "High",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 4,
+      "actualSP": 4
+  },
+  {
+      "task": "Migrate database to new server",
+      "developers": [
+          "Bob",
+          " Charlie"
+      ],
+      "status": "Ready to start",
+      "priority": "Critical",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 7,
+      "actualSP": 0
+  },
+  {
+      "task": "Conduct API load testing",
+      "developers": [
+          "Charlie"
+      ],
+      "status": "Waiting for review",
+      "priority": "High",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 5,
+      "actualSP": 5
+  },
+  {
+      "task": "Implement two-factor authentication",
+      "developers": [
+          "Alice",
+          " Bob"
+      ],
+      "status": "In Progress",
+      "priority": "Critical",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 8,
+      "actualSP": 7
+  },
+  {
+      "task": "Fix pagination issue on user table",
+      "developers": [
+          "Bob"
+      ],
+      "status": "Ready to start",
+      "priority": "Medium",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 4,
+      "actualSP": 0
+  },
+  {
+      "task": "Upgrade project dependencies",
+      "developers": [
+          "Charlie",
+          " Alice"
+      ],
+      "status": "Pending Deploy",
+      "priority": "High",
+      "type": "Other",
+      "date": "30 Apr 2025",
+      "estimatedSP": 6,
+      "actualSP": 5
+  },
+  {
+      "task": "Add localization support",
+      "developers": [
+          "Alice"
+      ],
+      "status": "Done",
+      "priority": "Medium",
+      "type": "Feature Enhancements",
+      "date": "30 Apr 2025",
+      "estimatedSP": 4,
+      "actualSP": 3
+  },
+  {
+      "task": "Fix 404 error on settings page",
+      "developers": [
+          "Bob"
+      ],
+      "status": "In Progress",
+      "priority": "Critical",
+      "type": "Bug",
+      "date": "30 Apr 2025",
+      "estimatedSP": 3,
+      "actualSP": 3
+  }
+]
